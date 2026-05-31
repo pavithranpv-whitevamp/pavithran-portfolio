@@ -1,0 +1,331 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --brand: #e94560;
+  --dark: #0a0a0a;
+  --surface: #111111;
+  --muted: #888888;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--dark);
+  color: #f5f5f5;
+  font-family: var(--font-body);
+}
+
+/* ── Scrollbar ───────────────────────────────── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--dark); }
+::-webkit-scrollbar-thumb { background: var(--brand); border-radius: 10px; }
+
+/* ── Selection ───────────────────────────────── */
+::selection { background: var(--brand); color: #fff; }
+
+/* ── Typography ──────────────────────────────── */
+.font-display { font-family: var(--font-display); }
+
+/* ── Gradient text ───────────────────────────── */
+.text-gradient {
+  background: linear-gradient(135deg, #ffffff 0%, #e94560 60%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Animations ──────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes slideRight {
+  from { width: 0; }
+  to   { width: 100%; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-12px); }
+}
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(233,69,96,0.3); }
+  50%       { box-shadow: 0 0 50px rgba(233,69,96,0.6); }
+}
+@keyframes scanline {
+  0%   { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.animate-fade-up   { animation: fadeUp 0.9s ease forwards; }
+.animate-fade-in   { animation: fadeIn 0.9s ease forwards; }
+.animate-float     { animation: float 5s ease-in-out infinite; }
+.animate-pulse-glow { animation: pulse-glow 2.5s ease-in-out infinite; }
+.animate-marquee   { animation: marquee 18s linear infinite; }
+
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-400 { animation-delay: 0.4s; }
+.delay-500 { animation-delay: 0.5s; }
+.delay-600 { animation-delay: 0.6s; }
+.delay-700 { animation-delay: 0.7s; }
+
+.opacity-0-init { opacity: 0; }
+
+/* ── Card hover (single definition) ────────── */
+.card-hover {
+  transition: transform 0.38s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.38s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.35s ease;
+}
+.card-hover:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 32px 64px rgba(0,0,0,0.35), 0 12px 28px rgba(233,69,96,0.18);
+}
+
+/* ── Noise overlay ───────────────────────────── */
+.noise::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.035;
+}
+
+/* ── Red line accent ─────────────────────────── */
+.line-accent {
+  display: inline-block;
+  width: 48px;
+  height: 2px;
+  background: var(--brand);
+  vertical-align: middle;
+  margin-right: 12px;
+}
+
+/* ── Skill badge ─────────────────────────────── */
+.skill-badge {
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.03);
+  transition: border-color 0.2s, background 0.2s, color 0.2s;
+}
+.skill-badge:hover {
+  border-color: var(--brand);
+  background: rgba(233,69,96,0.07);
+  color: #fff;
+}
+
+/* ── Scrollbar hide (marquee) ────────────────── */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+
+.stroke-text {
+  -webkit-text-stroke: 1px rgba(255,255,255,0.4);
+}
+
+/* ── Gallery section rhythm ─────────────────── */
+.gallery-surface {
+  border: 1px solid rgba(255,255,255,0.07);
+  background: linear-gradient(165deg, rgba(18,18,20,0.95) 0%, rgba(10,10,10,0.99) 55%, #0a0a0a 100%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 0 0 1px rgba(233,69,96,0.04);
+}
+
+.gallery-reveal {
+  animation: galleryReveal 0.52s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* ── Editorial gallery — spacious cinematic grid ─ */
+.gallery-grid-editorial {
+  display: grid;
+  align-items: stretch;
+  grid-auto-rows: minmax(min-content, auto);
+  gap: 1.35rem;
+}
+
+@media (min-width: 640px) {
+  .gallery-grid-editorial { gap: 1.6rem; }
+}
+
+@media (min-width: 1280px) {
+  .gallery-grid-editorial { gap: 1.85rem; }
+}
+
+.gallery-cell {
+  min-width: 0;
+  display: flex;
+}
+
+.gallery-cell > * {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+
+/* Core card slot — generous, breathable */
+.gallery-card-slot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 auto;
+  min-height: clamp(220px, 28vw, 400px);
+  min-width: 0;
+  padding: 1rem 1rem 0.6rem;
+  background:
+    radial-gradient(110% 80% at 50% -5%, rgba(233,69,96,0.065), transparent 58%),
+    linear-gradient(180deg, rgba(255,255,255,0.035) 0%, rgba(0,0,0,0.15) 100%);
+}
+
+.gallery-card-slot--compact {
+  min-height: clamp(200px, 28vw, 340px);
+}
+
+/* Media frame — fills more of the card */
+.gallery-media-frame {
+  position: relative;
+  isolation: isolate;
+  max-width: 100%;
+  max-height: min(100%, 58vh);
+  width: 100%;
+  height: auto;
+  aspect-ratio: var(--ga-w, 4) / var(--ga-h, 5);
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.12),
+    0 18px 56px rgba(0,0,0,0.48),
+    0 6px 20px rgba(0,0,0,0.28);
+}
+
+.gallery-media-abs {
+  position: absolute;
+  inset: 0;
+}
+
+.gallery-card-meta {
+  flex-shrink: 0;
+  border-top: 1px solid rgba(255,255,255,0.11);
+  background: linear-gradient(90deg, rgba(6,6,8,0.98), rgba(13,13,15,0.96), rgba(6,6,8,0.98));
+  backdrop-filter: blur(16px);
+  padding: 0.95rem 1.1rem;
+}
+
+@keyframes galleryReveal {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.modal-panel-enter {
+  animation: modalIn 0.38s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* ── Business card hover flip ─────────────── */
+.flip-stage {
+  perspective: 1400px;
+}
+
+.flip-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .flip-stage:hover .flip-inner {
+    transform: rotateY(180deg);
+  }
+}
+
+.flip-inner.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.flip-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.flip-face--back {
+  transform: rotateY(180deg);
+}
+
+/* ── Cinematic card shimmer on hover ─────────── */
+@keyframes shimmer {
+  0%   { transform: translateX(-100%) skewX(-12deg); }
+  100% { transform: translateX(220%) skewX(-12deg); }
+}
+
+.card-shimmer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 20;
+}
+
+.card-shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.065), transparent);
+  transform: translateX(-100%) skewX(-12deg);
+  transition: none;
+}
+
+.group\/card:hover .card-shimmer::after {
+  animation: shimmer 0.7s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+}
+
+/* ── Lightbox overlay upgrade ────────────────── */
+.lightbox-bg {
+  background: rgba(4,4,6,0.88);
+  backdrop-filter: blur(18px) saturate(0.8);
+}
+
+/* ── Gallery count label ─────────────────────── */
+.gallery-count-label {
+  font-size: 10px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding-bottom: 1.35rem;
+  border-bottom: 1px solid rgba(255,255,255,0.09);
+  margin-bottom: 1.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
